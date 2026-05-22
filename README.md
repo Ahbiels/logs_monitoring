@@ -24,3 +24,8 @@ Use esses dois quando você está lidando com I/O (Entrada/Saída), ou seja, len
 - https://gobyexample.com/json
 - http://medium.com/@aalves/golang-transformando-dados-marshal-unmarshal-decode-encode-porque-e-quando-2048ecbe1075
 - https://go.dev/blog/pipelines
+
+
+https://hub.docker.com/r/apache/kafka
+https://medium.com/@darshak.kachchhi/setting-up-a-kafka-cluster-using-docker-compose-a-step-by-step-guide-a1ee5972b122
+https://dev.to/kaike_castro/criando-um-cluster-do-kafka-com-docker-compose-e-desenvolvendo-um-consumer-e-producer-em-golang-403c

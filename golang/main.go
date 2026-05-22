@@ -10,6 +10,7 @@ import (
 
 	logging "cloud.google.com/go/logging/apiv2"
 	loggingpb "cloud.google.com/go/logging/apiv2/loggingpb"
+	"github.com/IBM/sarama"
 )
 
 var dat map[string]any
@@ -54,12 +55,26 @@ func main() {
 		close(ch)
 	}()
 
-	for log_serelialize := range ch{
-		_ = log_serelialize
+	for log_serelialize := range ch {
+		Producer(log_serelialize)
 	}
 
 	duracao := time.Since(inicio)
 	fmt.Printf("A execução levou: %s\n", duracao)
+}
+
+func Producer(ch []byte) {
+	producer, err := sarama.NewSyncProducer([]string{"localhost:9092"}, nil)
+	handler_func(err)
+	defer producer.Close()
+	
+	message := &sarama.ProducerMessage{
+		Topic: "test-topic",
+		Value: sarama.ByteEncoder(ch),
+	}
+	partition, offset, err := producer.SendMessage(message)
+	handler_func(err)
+	log.Printf("Message sent! Partition=%d Offset=%d\n", partition, offset)
 }
 
 func handler_func(err error) {
