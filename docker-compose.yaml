@@ -4,12 +4,10 @@ services:
     container_name: golang
     working_dir: /usr/src/app
     environment:
-      GOOGLE_APPLICATION_CREDENTIALS: ./key/credentials.json
-    volumes:
-      - ./golang:/usr/src/app
-    stdin_open: true
-    tty: true
-    command: bash
+      GOOGLE_APPLICATION_CREDENTIALS: /usr/src/app/key/credentials.json
+    ports:
+      - "7777:7777"
+    restart: always
 
 
   jupyter_notebook:

@@ -5,3 +5,4 @@
 .npm
 .ivy2
 key
+.env
