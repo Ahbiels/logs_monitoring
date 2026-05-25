@@ -28,7 +28,7 @@ func main() {
 	}
 	defer c.Close()
 
-	lastHour := time.Now().Add(-5 * time.Minute)
+	lastHour := time.Now().Add(-1 * time.Minute)
 	filter := fmt.Sprintf("timestamp >= %q", lastHour.Format(time.RFC3339))
 	req := &loggingpb.ListLogEntriesRequest{
 		ResourceNames: []string{
@@ -64,7 +64,7 @@ func main() {
 }
 
 func Producer(ch []byte) {
-	producer, err := sarama.NewSyncProducer([]string{"localhost:9092"}, nil)
+	producer, err := sarama.NewSyncProducer([]string{"broker:9092"}, nil)
 	handler_func(err)
 	defer producer.Close()
 	

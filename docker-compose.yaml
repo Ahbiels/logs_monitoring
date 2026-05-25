@@ -1,4 +1,28 @@
 services:
+  golang:
+    build: ./golang/
+    container_name: golang
+    working_dir: /usr/src/app
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: ./key/credentials.json
+    volumes:
+      - ./golang:/usr/src/app
+    stdin_open: true
+    tty: true
+    command: bash
+
+
+  jupyter_notebook:
+    image: jupyter/pyspark-notebook
+    container_name: jupyter_notebook
+    ports:
+      - "8888:8888"
+    user: root
+    volumes:
+      - ./jupyter:/home/jovyan
+    environment:
+      PYSPARK_SUBMIT_ARGS: "--packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 pyspark-shell"
+
   broker:
     image: apache/kafka:latest
     container_name: broker
@@ -8,10 +32,10 @@ services:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker:9093
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
