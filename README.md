@@ -29,3 +29,5 @@ Use esses dois quando você está lidando com I/O (Entrada/Saída), ou seja, len
 https://hub.docker.com/r/apache/kafka
 https://medium.com/@darshak.kachchhi/setting-up-a-kafka-cluster-using-docker-compose-a-step-by-step-guide-a1ee5972b122
 https://dev.to/kaike_castro/criando-um-cluster-do-kafka-com-docker-compose-e-desenvolvendo-um-consumer-e-producer-em-golang-403c
+
+https://pkg.go.dev/google.golang.org/protobuf/encoding/protojson

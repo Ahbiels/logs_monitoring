@@ -1,0 +1,11 @@
+Value 
+Severity Level	Description
+0	DEFAULT	No assigned severity level.
+100	DEBUG	Debug or trace information.
+200	INFO	Routine information (e.g., status or performance).
+300	NOTICE	Normal but significant events (e.g., startup/shutdown).
+400	WARNING	Events that might cause problems.
+500	ERROR	Events likely to cause problems.
+600	CRITICAL	Events causing more severe problems or outages.
+700	ALERT	Immediate action required.
+800	EMERGENCY	One or more systems are unusable.

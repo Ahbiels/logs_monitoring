@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -12,7 +11,11 @@ import (
 	logging "cloud.google.com/go/logging/apiv2"
 	loggingpb "cloud.google.com/go/logging/apiv2/loggingpb"
 	"github.com/IBM/sarama"
+	auditpb "google.golang.org/genproto/googleapis/cloud/audit"
+	"google.golang.org/protobuf/encoding/protojson"
 )
+
+var _ = auditpb.AuditLog{}
 
 var dat map[string]any
 var date_key string
@@ -78,7 +81,7 @@ func Producer(logs *loggingpb.LogEntry) {
 	handler_error(err)
 	defer producer.Close()
 
-	log_serialized, err := json.Marshal(logs)
+	log_serialized, err := protojson.Marshal(logs)
 
 	message := &sarama.ProducerMessage{
 		Topic: "topic_log_monitoring",
